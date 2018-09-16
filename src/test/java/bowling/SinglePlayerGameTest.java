@@ -1,9 +1,6 @@
 package bowling;
 
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -24,19 +21,19 @@ public class SinglePlayerGameTest {
 	 * Si on envoie toutes les 20 boules dans la rigole, le score final est 0
 	 */
 	@Test
-	public void testGutterGame() throws Exception {
+	public void testGutterGame() {
 		rollMany(20, 0);
 		assertEquals(0, game.score());
 	}
 
 	@Test
-	public void testAllOnes() throws Exception {
+	public void testAllOnes() {
 		rollMany(20, 1);
 		assertEquals(20, game.score());
 	}
 
 	@Test
-	public void testOneSpare() throws Exception {
+	public void testOneSpare()  {
 		rollSpare(); // 10 + 3
 		game.lancer(3); // 3
 		rollMany(17, 0); // 0
@@ -44,7 +41,7 @@ public class SinglePlayerGameTest {
 	}
 
 	@Test
-	public void testOneStrike() throws Exception {
+	public void testOneStrike()  {
 		rollStrike(); // 10 + 7
 		game.lancer(3);
 		game.lancer(4);
@@ -53,14 +50,14 @@ public class SinglePlayerGameTest {
 	}
 
 	@Test
-	public void testPerfectGame() throws Exception {
+	public void testPerfectGame() {
 		// 12 boules à 10 points
 		rollMany(12, 10);
 		assertEquals(300, game.score());
 	}
 
 	@Test
-	public void testTypicalGame() throws Exception {
+	public void testTypicalGame()  {
 		rollMany(8, 3); // 6 points aux 4 1° tours -> 24
 		rollStrike(); // 10 + 10
 		rollSpare(); // 10 + 0
@@ -70,7 +67,7 @@ public class SinglePlayerGameTest {
 		assertEquals(84, game.score());
 	}
 
-	// Quelques methodes utilitaires pour faciliter l'�criture des tests
+	// Quelques methodes utilitaires pour faciliter l'écriture des tests
 	private void rollMany(int n, int pins) {
 		for (int i = 0; i < n; i++) {
 			game.lancer(pins);
