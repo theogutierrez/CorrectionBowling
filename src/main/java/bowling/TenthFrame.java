@@ -14,6 +14,12 @@ public class TenthFrame extends Frame {
 
 	@Override
 	public void roll(int number) {
+		if (number < 0) {
+			throw new IllegalArgumentException("number must be positive");
+		}
+		if (ballsThrown > 2) {
+			throw new UnsupportedOperationException("Max 3 rolls in last Frame");
+		}		
 		ballsThrown++;
 		switch (ballsThrown) {
 			case 1:
