@@ -2,14 +2,17 @@ package bowling;
 
 /**
  * Le 10° tour, différent de tous les autres tours : Il peut avoir trois lancés
- * Il n'a pas de lancé suivant
+ * Il n'a pas de lancé suivant.
+ * 
+ * La classe n'est pas publique, sa visibilité est limitée au package
  */
 public class TenthFrame extends Frame {
 
 	private int thirdRoll = 0;
 
-	public TenthFrame() {
-		super(10, null);
+	public TenthFrame() {		
+		frameNumber = 10;
+		nextFrame = null;
 	}
 
 	@Override

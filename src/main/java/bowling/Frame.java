@@ -2,17 +2,28 @@ package bowling;
 
 /**
  * Correspond à un tour du jeu, constitué de 1 ou 2 lancés Connait sa Frame
- * suivante, pour calculer le bonus éventuel pour le strike ou le spare
+ * suivante, pour calculer le bonus éventuel pour le strike ou le spare.
+ * 
+ * La classe n'est pas publique, sa visibilité est limitée au package
  */
-public class Frame {
+class Frame {
 
-	private final int frameNumber;
-	private final Frame nextFrame;
+	protected int frameNumber;
+	protected Frame nextFrame;
 	protected int firstRoll = 0;
 	protected int secondRoll = 0;
 	protected int ballsThrown = 0;
+	
+	protected Frame() {/* pour l'héritage */};
 
-	public Frame(int number, Frame next) {
+	Frame(int number, Frame next) {
+		if (number < 1 || number > 9) {
+			throw new IllegalArgumentException("Normal frames are numbered from 1 to 9");
+		}
+		if (next == null) {
+			throw new IllegalArgumentException("All normal frames have e next frame");
+		}
+		
 		frameNumber = number;
 		nextFrame = next;
 	}
@@ -20,7 +31,7 @@ public class Frame {
 	/**
 	 * enregistrer le r�sultat d'un lancer
 	 *
-	 * @param number : nombre de quilles abattue � ce lancer
+	 * @param number : nombre de quilles abattue à ce lancer
 	 */
 	public void roll(int number) {
 		if (number < 0) {
@@ -59,16 +70,16 @@ public class Frame {
 	}
 
 	/**
-	 * @return le bonus accord� par ce tour en cas de spare au tour
-	 * pr�c�dent
+	 * @return le bonus accordé par ce tour en cas de spare au tour
+	 * précédent
 	 */
 	public int spareBonus() {
 		return firstRoll;
 	}
 
 	/**
-	 * @return le bonus accord� par ce tour en cas de strike au tour
-	 * pr�c�dent
+	 * @return le bonus accordé par ce tour en cas de strike au tour
+	 * précédent
 	 */
 	public int strikeBonus() {
 		if (isStrike()) {

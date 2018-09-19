@@ -35,7 +35,10 @@ public class SinglePlayerGame {
 		if (currentFrame.isFinished()) {
 			currentFrame = currentFrame.next();
 		}
-		currentFrame.roll(nombreDeQuillesAbattues);
+		if (currentFrame != null)
+			currentFrame.roll(nombreDeQuillesAbattues);
+		else
+			throw new UnsupportedOperationException("Le jeu est fini");
 
 	}
 
