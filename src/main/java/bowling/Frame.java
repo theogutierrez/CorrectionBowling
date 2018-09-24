@@ -3,10 +3,8 @@ package bowling;
 /**
  * Correspond à un tour du jeu, constitué de 1 ou 2 lancés Connait sa Frame
  * suivante, pour calculer le bonus éventuel pour le strike ou le spare.
- * 
- * La classe n'est pas publique, sa visibilité est limitée au package
  */
-class Frame {
+public class Frame {
 
 	protected int frameNumber;
 	protected Frame nextFrame;
@@ -14,7 +12,7 @@ class Frame {
 	protected int secondRoll = 0;
 	protected int ballsThrown = 0;
 	
-	protected Frame() {/* pour l'héritage */};
+	Frame() {/* pour l'héritage */};
 
 	Frame(int number, Frame next) {
 		if (number < 1 || number > 9) {
@@ -29,11 +27,34 @@ class Frame {
 	}
 
 	/**
-	 * enregistrer le r�sultat d'un lancer
+	 * 
+	 * @return the number of balls already thrown in this frame
+	 **/
+	public int getBallsThrown() {
+		return ballsThrown;
+	}
+
+	/**
+	 * 
+	 * @return le numéro de cette frame
+	 */
+	public int getFrameNumber() {
+		return frameNumber;
+	}
+
+	/**
+	 * @return vrai si ce tour est fini, faux sinon
+	 */
+	public boolean isFinished() {
+		return isStrike() || (ballsThrown == 2);
+	}
+	
+	/**
+	 * enregistrer le résultat d'un lancer
 	 *
 	 * @param number : nombre de quilles abattue à ce lancer
 	 */
-	public void roll(int number) {
+	void roll(int number) {
 		if (number < 0) {
 			throw new IllegalArgumentException("number must be positive");
 		}
@@ -58,14 +79,14 @@ class Frame {
 	/**
 	 * @return vrai si ce tour est un stike, faux sinon
 	 */
-	public boolean isStrike() {
+	boolean isStrike() {
 		return firstRoll == 10;
 	}
 
 	/**
 	 * @return vrai si ce tour est un spare, faux sinon
 	 */
-	public boolean isSpare() {
+	boolean isSpare() {
 		return (firstRoll + secondRoll) == 10;
 	}
 
@@ -73,7 +94,7 @@ class Frame {
 	 * @return le bonus accordé par ce tour en cas de spare au tour
 	 * précédent
 	 */
-	public int spareBonus() {
+	int spareBonus() {
 		return firstRoll;
 	}
 
@@ -81,7 +102,7 @@ class Frame {
 	 * @return le bonus accordé par ce tour en cas de strike au tour
 	 * précédent
 	 */
-	public int strikeBonus() {
+	int strikeBonus() {
 		if (isStrike()) {
 			return firstRoll + nextFrame.spareBonus();
 		} else {
@@ -96,7 +117,7 @@ class Frame {
 	 * @return le score
 	 *
 	 */
-	public int score() {
+	int score() {
 		int frameScore = 0;
 		if (isStrike()) {
 			frameScore = 10 + nextFrame.strikeBonus();
@@ -109,16 +130,9 @@ class Frame {
 	}
 
 	/**
-	 * @return vrai si ce tour est fini, faux sinon
-	 */
-	public boolean isFinished() {
-		return isStrike() || (ballsThrown == 2);
-	}
-
-	/**
 	 * @return le tour suivant ce tour
 	 */
-	public Frame next() {
+	Frame next() {
 		return nextFrame;
 	}
 

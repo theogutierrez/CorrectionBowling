@@ -50,4 +50,14 @@ public class SinglePlayerGame {
 	public int score() {
 		return firstFrame.score();
 	}
+
+	/**
+	 * 
+	 * @return la frame courante pour ce jeu 
+	 */
+	public Frame getCurrentFrame() {
+		return currentFrame;
+	}
+	
+	
 }

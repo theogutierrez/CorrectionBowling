@@ -6,17 +6,17 @@ package bowling;
  * 
  * La classe n'est pas publique, sa visibilité est limitée au package
  */
-public class TenthFrame extends Frame {
+class TenthFrame extends Frame {
 
 	private int thirdRoll = 0;
 
-	public TenthFrame() {		
+	TenthFrame() {		
 		frameNumber = 10;
 		nextFrame = null;
 	}
 
 	@Override
-	public void roll(int number) {
+	void roll(int number) {
 		if (number < 0) {
 			throw new IllegalArgumentException("number must be positive");
 		}
@@ -37,12 +37,12 @@ public class TenthFrame extends Frame {
 	}
 
 	@Override
-	public int strikeBonus() {
+	int strikeBonus() {
 		return firstRoll + secondRoll;
 	}
 
 	@Override
-	public int score() {
+	int score() {
 		return firstRoll + secondRoll + thirdRoll;
 	}
 
