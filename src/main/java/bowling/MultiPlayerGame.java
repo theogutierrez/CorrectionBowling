@@ -21,7 +21,7 @@ public interface MultiPlayerGame {
 	 * @return une chaîne de caractères indiquant le prochain joueur,
 	 * de la forme "Prochain tir : joueur Bastide, tour n° 5, boule n° 2",
 	 * ou bien "Partie terminée" si la partie est terminée.
-	 * @throws java.lang.Exception si la partie n'est pas démarrée, ou si elle est terminée.
+	 * @throws java.lang.Exception si la partie n'est pas démarrée.
 	 */
 	public String lancer(int nombreDeQuillesAbattues) throws Exception ;
 	

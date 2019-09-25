@@ -32,14 +32,13 @@ public class SinglePlayerGame {
 	 * ce lancé
 	 */
 	public void lancer(int nombreDeQuillesAbattues) {
+		if (currentFrame == null)
+			throw new UnsupportedOperationException("Le jeu est fini");
+			
+		currentFrame.roll(nombreDeQuillesAbattues);
 		if (currentFrame.isFinished()) {
 			currentFrame = currentFrame.next();
 		}
-		if (currentFrame != null)
-			currentFrame.roll(nombreDeQuillesAbattues);
-		else
-			throw new UnsupportedOperationException("Le jeu est fini");
-
 	}
 
 	/**

@@ -27,6 +27,15 @@ public class OtherTest {
 		game.lancer(0);
 	}
 	
+	@Test
+	public void twoStrikeGame() {
+		rollStrike(); // 10 + 10 + 4 
+		rollStrike(); // 10 + 4 + 3 
+		game.lancer(4); // 4
+		game.lancer(3); // 3
+		assertEquals((10+10+4) + (10+4+3) + 4 + 3, game.score());
+	}
+	
 
 	// Quelques methodes utilitaires pour faciliter l'écriture des tests
 	private void rollMany(int n, int pins) {
