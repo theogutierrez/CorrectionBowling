@@ -24,13 +24,14 @@ public class SinglePlayerGameTest {
 	public void testGutterGame() {
 		rollMany(20, 0);
 		assertEquals(0, game.score());
+		assertTrue(game.isFinished());
 	}
 
 	@Test
 	public void testAllOnes() {
 		rollMany(20, 1);
 		assertEquals(20, game.score());
-	}
+		assertTrue(game.isFinished());	}
 
 	@Test
 	public void testOneSpare()  {
@@ -38,15 +39,20 @@ public class SinglePlayerGameTest {
 		game.lancer(3); // 3
 		rollMany(17, 0); // 0
 		assertEquals(16, game.score());
+		assertTrue(game.isFinished());
 	}
 
 	@Test
 	public void testOneStrike()  {
 		rollStrike(); // 10 + 7
+		assertTrue(game.hasCompletedFrame());
+                assertEquals(1, game.getNextBallNumber());
 		game.lancer(3);
 		game.lancer(4);
+		assertTrue(game.hasCompletedFrame());
 		rollMany(16, 0);
 		assertEquals(24, game.score());
+		assertTrue(game.isFinished());
 	}
 
 	@Test
@@ -54,16 +60,20 @@ public class SinglePlayerGameTest {
 		// 12 boules à 10 points
 		rollMany(12, 10);
 		assertEquals(300, game.score());
+		assertTrue(game.isFinished());
 	}
 
 	@Test
 	public void testTypicalGame()  {
 		rollMany(8, 3); // 6 points aux 4 1° tours -> 24
+		assertTrue(game.hasCompletedFrame()); // Le dernier tir a terminé le cours précédent
+                assertEquals(5, game.getFrameNumber()); // On est au tour n° 5
 		rollStrike(); // 10 + 10
+		assertTrue(game.hasCompletedFrame());
 		rollSpare(); // 10 + 0
 		rollMany(6, 0); // 0 points aux 3 tours suivants
 		rollMany(3, 10); // 30 points au dernier tour
-
+		assertTrue(game.isFinished());
 		assertEquals(84, game.score());
 	}
 

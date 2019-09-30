@@ -51,12 +51,31 @@ public class SinglePlayerGame {
 	}
 
 	/**
-	 * 
-	 * @return la frame courante pour ce jeu 
-	 */
-	public Frame getCurrentFrame() {
-		return currentFrame;
+         * @return vrai si le jeu est finin faux sinon
+         */
+        public boolean isFinished() {
+		return (currentFrame == null);
 	}
 	
+	/**
+         * @return vrai si le dernier lancer à terminé le tour précédent
+         */
+	public boolean hasCompletedFrame() {
+		return currentFrame.getBallsThrown() == 0;
+	}
 	
+	/**
+         * @return Le numéro du tour courant [1..10], ou 0 si le jeu est fini
+         */
+	public int getFrameNumber() {
+		return isFinished() ? 0 : currentFrame.getFrameNumber();
+	}
+
+	/**
+         * @return Le numéro du prochain lancer pour tour courant [1..2], ou 0 si le jeu est fini
+         */
+        public int getNextBallNumber() {
+		return isFinished() ? 0 : currentFrame.getBallsThrown() +1;
+	}
+
 }

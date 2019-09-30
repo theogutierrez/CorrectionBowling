@@ -4,7 +4,7 @@ package bowling;
  * Correspond à un tour du jeu, constitué de 1 ou 2 lancés Connait sa Frame
  * suivante, pour calculer le bonus éventuel pour le strike ou le spare.
  */
-public class Frame {
+class Frame {
 
 	protected int frameNumber;
 	protected Frame nextFrame;
